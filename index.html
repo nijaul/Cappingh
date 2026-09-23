@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BRISNET Handicapper</title>
+<style>
+body{font-family:system-ui,sans-serif;background:#f4f6f9;color:#172033;margin:0}
+main{max-width:900px;margin:auto;padding:28px}
+.card{background:#fff;border:1px solid #dde3eb;border-radius:14px;padding:22px;margin-bottom:18px}
+h1,h2{margin-top:0}
+.step{background:#f5f7fa;padding:12px 14px;border-radius:9px;margin:10px 0}
+button,a{display:inline-block;padding:10px 14px;border-radius:8px;background:#172033;color:#fff;text-decoration:none}
+.muted{color:#617087}
+.warn{background:#fff8e6;padding:12px;border-radius:9px}
+code{background:#eef1f5;padding:2px 5px;border-radius:5px}
+</style>
+</head>
+<body>
+<main>
+<div class="card">
+<h1>🐎 BRISNET Horse Race Handicapper</h1>
+<p>This version runs <b>entirely on GitHub</b>. There is no server to start or maintain.</p>
+</div>
+
+<div class="card">
+<h2>Upload a BRISNET PDF</h2>
+<p>Because this app uses GitHub Actions for PDF processing, the PDF is uploaded to the repository rather than through this webpage.</p>
+
+<div class="step"><b>1.</b> Open the repository's <code>input</code> folder.</div>
+<div class="step"><b>2.</b> Click <b>Add file → Upload files</b>.</div>
+<div class="step"><b>3.</b> Upload your BRISNET Ultimate PP PDF and commit the change to <code>main</code>.</div>
+<div class="step"><b>4.</b> GitHub automatically runs the handicapper.</div>
+<div class="step"><b>5.</b> Return to this page and open the generated results.</div>
+
+<p><a id="uploadLink" href="#" target="_blank" rel="noopener">Open repository upload page</a></p>
+<p><a href="results/">Open latest handicap results</a></p>
+</div>
+
+<div class="card">
+<h2>What it extracts</h2>
+<p>Race summaries, post position, horse, morning line, running style, Prime Power, pace, E1/E2, late speed, speed, race rating, and average class where those fields are present.</p>
+<p class="warn"><b>Model %</b> is a normalized handicapping score within each race, not a calibrated probability or guarantee of the outcome.</p>
+</div>
+
+<script>
+const parts = location.pathname.split("/").filter(Boolean);
+const user = location.hostname.split(".")[0];
+const repo = parts[0] || "";
+const link = document.getElementById("uploadLink");
+if (user && repo) {
+  link.href = `https://github.com/${user}/${repo}/upload/main/input`;
+} else {
+  link.textContent = "Open GitHub repository";
+  link.href = "https://github.com/";
+}
+</script>
+</main>
+</body>
+</html>
